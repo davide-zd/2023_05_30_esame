@@ -53,18 +53,8 @@ class Controller:
 
 
 
-    def handle_volume(self, e):
-        retailer= self._model._grafo.nodes()
-        lista=[]
-        #la cosa più semplice è fare una funzione a livello di model che passandogli il retailer restituisce il peso degli archi adiacenti
-        for r in retailer:
-            peso = self._model.volume(r)
-            lista.append((r,peso))
-        lista_sorted = sorted(lista, key=lambda x: x[1], reverse=True)
-
-        for t in lista_sorted:
-            self._view.txt_result.controls.append(ft.Text(f"{t[0]}  --> {t[1]} "))
-        self._view.update_page()
+    def handle_analizza(self, e):
+        pass
 
 
 
