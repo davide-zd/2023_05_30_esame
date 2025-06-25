@@ -36,7 +36,8 @@ class View(ft.UserControl):
         #creo e popolo i DD
         self.ddyear = ft.Dropdown(label="Anno")
         self.ddcountry= ft.Dropdown(label="Nazione")
-        self._controller.fillDD()
+        self._controller.fillDD_year()
+        self._controller.fillDD_country()
         self.txtNumero = ft.TextField(label="Prodotti in comune")
 
 
@@ -46,23 +47,28 @@ class View(ft.UserControl):
                       alignment=ft.MainAxisAlignment.CENTER)
         self._page.controls.append(row1)
 
-
-        # List View where the reply is printed
-        self.txt_result = ft.ListView(expand=0, spacing=5, padding=5, auto_scroll=True)
-        self._page.controls.append(self.txt_result)
-        self._page.update()
-
-
         self.dd_riventitori = ft.Dropdown(label="Rivenditori")
         self.btn_analizza = ft.ElevatedButton(text="AnalizzaComponente", on_click=self._controller.handle_analizza)
-        row2 = ft.Row([ self.dd_riventitori,self.btn_analizza],
+        row2 = ft.Row([self.dd_riventitori, self.btn_analizza],
                       alignment=ft.MainAxisAlignment.CENTER)
         self._page.controls.append(row2)
 
-        self.txtOut2 = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
-        self._page.controls.append(self.txtOut2)
-        self._page.update()
+        self.txt_result = ft.ListView(expand=0, spacing=5, padding=5, auto_scroll=True)
+        self._page.controls.append(self.txt_result)
 
+        # contenitore per la stampa dei nodi
+        self._txtOut = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
+        cont = ft.Container(self._txtOut, width=300, height=200, alignment=ft.alignment.top_left,
+                            bgcolor="#deeded")
+
+        # contenitore per la stampa degli archi
+        self._txtOut2 = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
+        cont2 = ft.Container(self._txtOut2, width=300, height=200, alignment=ft.alignment.top_center,
+                            bgcolor="#deeded")
+        # riga 3 dei contenitori
+        row3 = ft.Row([cont, cont2])
+        self._page.controls.append(row3)
+        self._page.update()
 
 
     @property
